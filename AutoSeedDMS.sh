@@ -18,13 +18,19 @@ sleep 10
 
 echo "Here we go!"
 
+#This section installs the prerequisites for SeedDMS
+
 yum install -y epel-release
 
 yum install -y httpd mod_ssl php php-gd php-mysql php-pear wget php-mbstring poppler-utils php-pear-Log php-pdo php-ZendFramework-Search-Lucene nano
 
+#This starts Apache and ensures it starts on reboot/start up of the server
+
 systemctl enable httpd
 
 systemctl start httpd
+
+#This section makes a temporary folder in the current user home directory this script runs under and the downloads the SeedDMS packages
 
 mkdir ~/temp
 
@@ -36,6 +42,8 @@ wget https://sourceforge.net/projects/seeddms/files/seeddms-5.1.9/seeddms-5.1.9.
 
 wget https://sourceforge.net/projects/seeddms/files/seeddms-5.1.9/SeedDMS_Core-5.1.9.tgz -O ~/temp/SeedDMS_Core-5.1.9.tgz
 
+#This section installs SeedDMS and SeedDMS components using pear
+
 pear install SeedDMS_Core-5.1.9.tgz
 
 pear install SeedDMS_Lucene-1.1.13.tgz
@@ -46,7 +54,11 @@ pear install HTTP_WebDAV_Server-1.0.0RC8
 
 pear install Log
 
+#This part extracts the SeedDMS package to the previously mentioned temp folder
+
 tar xvzf ~/temp/seeddms-5.1.9.tar.gz -C ~/temp/
+
+#This section makes the directories for SeedDMS and its components, then it copies over the contents from that previously extracted SeedDMS package 
 
 mkdir /var/www/html/seeddms
 
@@ -66,11 +78,17 @@ mv /var/www/html/seeddms/conf.template /var/www/html/seeddms/conf
 
 touch /var/www/html/seeddms/conf/ENABLE_INSTALL_TOOL
 
+#This part sets the permissions for the Apache folder, makes Apache the owner of that folder and downward
+
 chown -R apache:apache /var/www
 
 chmod -R 770 /var/www/html/
 
+#This command temporairly disabled SELinux until the next reebot
+
 setenforce 0
+
+#This restarts Apache, creates a exception to allow Apache to connect to a remote database and lastly allows for http and https traffic to pass through Firewalld
 
 service httpd restart
 
@@ -93,5 +111,7 @@ echo "-----------------------------------------"
 echo "After successfully getting past the installation page and the ENABLE_INSTALL_TOOL file has been removed; enter IPADDRESSOFTHEVM/seeddms/out/out.Login.php to get to the login page."
 
 echo "-----------------------------------------"
+
+echo "The default login should be admin for username and the password"
 
 rm -rf ~/temp
