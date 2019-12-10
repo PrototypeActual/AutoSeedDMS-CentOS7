@@ -76,8 +76,6 @@ service httpd restart
 
 setsebool -P httpd_can_network_connect_db=1
 
-setsebool httpd_execmem on
-
 firewall-cmd --permanent --add-service=http
 
 firewall-cmd --permanent --add-service=https
@@ -97,5 +95,3 @@ echo "After successfully getting past the installation page and the ENABLE_INSTA
 echo "-----------------------------------------"
 
 rm -rf ~/temp
-
-#rm -f /root/seed.sh 
