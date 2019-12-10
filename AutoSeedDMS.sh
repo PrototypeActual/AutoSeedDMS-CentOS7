@@ -1,7 +1,7 @@
 #!/bin/bash
 #CT aka PrototypeActual
 #SeedDMS 5.1.9
-#December 5th 2019
+#December 10th 2019
 
 echo "User/Administrator be advised,
 This script deploys SeedDMS only and will need a Database Server with a database table, user and the user permission granted to fully complete the last section of this SeedDMS installation."
