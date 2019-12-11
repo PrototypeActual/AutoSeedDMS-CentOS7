@@ -42,13 +42,15 @@ wget https://sourceforge.net/projects/seeddms/files/seeddms-5.1.9/seeddms-5.1.9.
 
 wget https://sourceforge.net/projects/seeddms/files/seeddms-5.1.9/SeedDMS_Core-5.1.9.tgz -O ~/temp/SeedDMS_Core-5.1.9.tgz
 
-#This section installs SeedDMS and SeedDMS components using pear
+#This section installs SeedDMS and SeedDMS components using pear as well as updating the pear channels
 
-pear install SeedDMS_Core-5.1.9.tgz
+pear update-channels
 
-pear install SeedDMS_Lucene-1.1.13.tgz
+pear install ~/temp/SeedDMS_Core-5.1.9.tgz
 
-pear install SeedDMS_Preview-1.2.9.tgz
+pear install ~/temp/SeedDMS_Lucene-1.1.13.tgz
+
+pear install ~/temp/SeedDMS_Preview-1.2.9.tgz
 
 pear install HTTP_WebDAV_Server-1.0.0RC8
 
@@ -84,25 +86,21 @@ chown -R apache:apache /var/www
 
 chmod -R 770 /var/www/html/
 
-#This command temporairly disabled SELinux until the next reebot
-
-setenforce 0
-
-#This restarts Apache, creates a exception to allow Apache to connect to a remote database and lastly allows for http and https traffic to pass through Firewalld
+#This restarts Apache, creates a exception to allow Apache to connect to a remote database, and allows access for SeedDMS to pass through SELinux
 
 service httpd restart
 
 setsebool -P httpd_can_network_connect_db=1
+
+chcon -t httpd_sys_rw_content_t -R /var/www/html/
+
+#This last section allows for http and https traffic to pass through Firewalld
 
 firewall-cmd --permanent --add-service=http
 
 firewall-cmd --permanent --add-service=https
 
 firewall-cmd --reload
-
-echo "If having issues run setenforce 0 to temporarily disable SELinux"
-
-echo "-----------------------------------------"
 
 echo "To get to the installation page enter in Web Browser IPADDRESSOFTHEVM/seeddms/"
 
