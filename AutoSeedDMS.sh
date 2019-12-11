@@ -22,7 +22,7 @@ echo "Here we go!"
 
 yum install -y epel-release
 
-yum install -y httpd mod_ssl php php-gd php-mysql php-pear wget php-mbstring poppler-utils php-pear-Log php-pdo php-ZendFramework-Search-Lucene nano
+yum install -y httpd mod_ssl php php-gd php-mysql php-pear wget php-mbstring poppler-utils php-pear-Log php-pdo php-ZendFramework-Search-Lucene
 
 #This starts Apache and ensures it starts on reboot/start up of the server
 
