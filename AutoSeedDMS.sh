@@ -88,7 +88,7 @@ chmod -R 770 /var/www/html/
 
 #This restarts Apache, creates a exception to allow Apache to connect to a remote database, and allows access for SeedDMS to pass through SELinux
 
-service httpd restart
+systemctl restart httpd
 
 setsebool -P httpd_can_network_connect_db=1
 
