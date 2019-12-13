@@ -92,7 +92,7 @@ systemctl restart httpd
 
 setsebool -P httpd_can_network_connect_db=1
 
-chcon -t httpd_sys_rw_content_t -R /var/www/html/
+setsebool -P httpd_unified 1
 
 #This last section allows for http and https traffic to pass through Firewalld
 
