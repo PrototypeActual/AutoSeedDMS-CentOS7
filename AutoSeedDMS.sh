@@ -6,23 +6,19 @@
 echo "User/Administrator be advised,
 This script deploys SeedDMS only and will need a Database Server with a database table, user and the user permission granted to fully complete the last section of this SeedDMS installation."
 
-sleep 15
-
-yum update -y
-
-echo "Manual EPEL repo installation process was removed in this version but if you're having issues in regards to install EPEL repo or missing packages; try running this manually."
-#Run this command but ensure url link to EPEL repo rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm is reachable.
-#Ex. rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-
 sleep 10
 
 echo "Here we go!"
 
-#This section installs the prerequisites for SeedDMS
+sleep 3
+
+#This section updates the machine and installs the prerequisites for SeedDMS
+
+yum update -y
 
 yum install -y epel-release
 
-yum install -y httpd mod_ssl php php-gd php-mysql php-pear wget php-mbstring poppler-utils php-pear-Log php-pdo php-ZendFramework-Search-Lucene
+yum install -y httpd php-mysql php-pear php-gd php-mbstring php-pdo php-pear-Log php-ZendFramework-Search-Lucene php-pear-Image-Text
 
 #This starts Apache and ensures it starts on reboot/start up of the server
 
@@ -52,7 +48,7 @@ pear install ~/temp/SeedDMS_Lucene-1.1.13.tgz
 
 pear install ~/temp/SeedDMS_Preview-1.2.9.tgz
 
-pear install HTTP_WebDAV_Server-1.0.0RC8
+pear install --alldeps HTTP_WebDAV_Server-1.0.0RC8
 
 pear install Log
 
