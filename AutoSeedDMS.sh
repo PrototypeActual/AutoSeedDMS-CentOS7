@@ -30,7 +30,7 @@ systemctl enable httpd
 
 systemctl start httpd
 
-#This section makes a temporary folder in the current user home directory this script runs under and the downloads the SeedDMS packages
+#This section makes a temporary folder in the current user home directory this script runs under and then downloads the SeedDMS packages
 
 mkdir ~/temp
 
