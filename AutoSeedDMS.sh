@@ -18,7 +18,7 @@ yum update -y
 
 yum install -y epel-release
 
-yum install -y httpd php-mysql php-pear php-gd php-mbstring php-pdo php-pear-Log php-ZendFramework-Search-Lucene php-pear-Image-Text
+yum install -y httpd wget php php-mysql php-pear php-gd php-mbstring php-pdo php-pear-Log php-ZendFramework-Search-Lucene php-pear-Image-Text
 
 #This starts Apache and ensures it starts on reboot/start up of the server
 
