@@ -48,7 +48,7 @@ pear install ~/temp/SeedDMS_Lucene-1.1.13.tgz
 
 pear install ~/temp/SeedDMS_Preview-1.2.9.tgz
 
-pear install --alldeps HTTP_WebDAV_Server-1.0.0RC8
+pear install HTTP_WebDAV_Server-1.0.0RC8
 
 pear install Log
 
