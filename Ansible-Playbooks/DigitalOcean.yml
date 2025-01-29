@@ -1,0 +1,32 @@
+---
+- hosts: do
+
+  vars:
+    DO_API_TOKEN:
+
+  tasks:
+  - name: Ensure SSH key exists
+    community.digitalocean.digital_ocean:
+      state: present
+      command: ssh
+      name: my_ssh_key
+      ssh_pub_key: '.ssh/id_rsa'
+      api_token="{{ DO_API_TOKEN }}"
+
+  - name: Create new droplet with SSH key
+    community.digitalocean.digital_ocean_droplet:
+      state: present
+      name: ['droplet1', 'droplet2']
+      oauth_token="{{ DO_API_TOKEN }}"
+      size: 1gb
+      region: nyc1
+      image: centos-7-x64
+      unique_name: yes
+      ssh_keys: my_ssh_key
+      wait_timeout: 500
+    register: my_droplets
+
+  - ansible.builtin.debug:
+      msg: "ID is {{ my_droplets.data.droplet.id, IP is {{ my_droplets.data.ip_address }}
+
+

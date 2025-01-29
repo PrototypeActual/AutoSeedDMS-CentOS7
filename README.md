@@ -24,3 +24,6 @@ Ex. server Apache1 192.168.1.10:80 check cookie s1
 4. You will also need to update the login for the stats page or comment out
 stats auth admin:haproxy
 4a. This line is located in the haproxy config file under the frontend section
+
+# DigitalOcean
+Unfinished playbook to create DigitalOcean droplets and display their IP
